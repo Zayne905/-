@@ -12,7 +12,7 @@ spring:
 
   # 添加数据库配置（即使不用，也要有）
   datasource:
-    url: jdbc:mysql://192.168.178.135:3306/springcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.178.135:3307/springcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
