@@ -1,0 +1,36 @@
+server:
+  port: 8222
+spring:
+  application:
+    name: hrshop-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: hrshop-user
+          uri: lb://hrshop-user
+          predicates:
+            - Path=/hrshop-user/**
+          filters:
+            - StripPrefix=1
+        - id: hrshop-web
+          uri: lb://hrshop-web
+          predicates:
+            - Path=/hrshop-web/**
+          filters:
+            - StripPrefix=1
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8888/eureka
+  instance:
+    prefer-ip-address: true
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: hrshop-user
+        url: /hrshop-user/v3/api-docs
+      - name: hrshop-web
+        url: /hrshop-web/v3/api-docs
