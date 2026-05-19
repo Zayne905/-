@@ -13,19 +13,6 @@ spring:
     generate-ddl: true # 是否自动建表
     database: mysql # jpa连接的数据库类型
 
-  config:
-    import: "optional:configserver:"   # 去掉硬编码地址，由 discovery 自动寻找
-
-  cloud:
-    config:
-      discovery:
-        enabled: true                   # 启用通过Eureka发现Config Server
-        service-id: hrshop-config       # 对应你的Config Server的服务名
-      profile: dev
-      label: main
-
-
-
   rabbitmq:
     host: 192.168.178.135 # rabbitmq所在虚机地址
     port: 5672
