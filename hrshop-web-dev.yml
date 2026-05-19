@@ -1,0 +1,66 @@
+server:
+  port: 9002
+
+
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:7779
+  application:
+    name: hrshop-web
+
+  # 添加数据库配置（即使不用，也要有）
+  datasource:
+    url: jdbc:mysql://192.168.178.135:3306/springcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none  # web模块不需要建表
+
+  cloud:
+    discovery:
+      client:
+        composite-indicator:
+          enabled: true
+    loadbalancer:
+      retry:
+        enabled: false
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+eureka:
+  client:
+    register-with-eureka: true # 作为客户端需要注册到Eureka
+    fetch-registry: true  # 作为客户端需要从Eureka获取注册信息
+    service-url: # 客户端注册地址
+      defaultZone: http://localhost:8888/eureka
+  instance:
+  # 优先使用该服务的IP地址注册到Eureka，在生产环境建议改为true
+    prefer-ip-address: true
+# 必须加！开放监控接口，让Admin能获取信息
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+#hrshop-user:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+#feign:
+#  circuitbreaker:
+#    enabled: true
+
