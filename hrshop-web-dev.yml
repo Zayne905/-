@@ -33,7 +33,18 @@ spring:
     openfeign:
       circuitbreaker:
         enabled: true
+  config:
+    import: optional:configserver:http://localhost:12000  # 关键！
+    profile: dev  # 环境
+    label: main
 
+  rabbitmq:
+    host: 192.168.178.135 # rabbitmq所在虚机地址
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    
 eureka:
   client:
     register-with-eureka: true # 作为客户端需要注册到Eureka
